@@ -30,5 +30,12 @@ namespace Heroes.Infrastructure.Repositories
         {
             return await _context.Heroes.AnyAsync(h => h.Name.ToLower() == name.ToLower());
         }
+        public async Task<List<Hero>> GetAllAsync()
+        {
+            return await _context.Heroes
+                .Include(h => h.HeroSuperPowers)
+                .ThenInclude(hs => hs.SuperPower)
+                .ToListAsync();
+        }
     }
 }

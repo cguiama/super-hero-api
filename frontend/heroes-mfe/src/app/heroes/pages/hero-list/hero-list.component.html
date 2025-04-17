@@ -1,0 +1,13 @@
+<h2>Lista de Heróis</h2>
+
+<div *ngIf="heroStore.heroesSignal().length; else loading">
+  <ul>
+    <li *ngFor="let hero of heroStore.heroesSignal()">
+      <strong>{{ hero.heroName }}</strong> ({{ hero.name }})
+    </li>
+  </ul>
+</div>
+
+<ng-template #loading>
+  <p>Carregando heróis...</p>
+</ng-template>

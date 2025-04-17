@@ -33,7 +33,11 @@ namespace Heroes.Application.Features.Heroes.Commands.CreateHero
             {
                 foreach (var powerId in dto.SuperPowerIds)
                 {
-                    hero.AddPower(new HeroSuperPower(hero.Id, powerId));
+                    var power = await _repository.GetSuperPowerByIdAsync(powerId); // novo método no repositório
+                    if (power != null)
+                    {
+                        hero.AddPower(new HeroSuperPower(hero, power));
+                    }
                 }
             }
 

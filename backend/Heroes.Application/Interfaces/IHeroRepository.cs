@@ -11,6 +11,7 @@ namespace Heroes.Application.Interfaces
         Task UpdateAsync(Hero hero);
         Task<Hero?> GetByNameAsync(string name);
         Task DeleteAsync(Hero hero);
+        Task<SuperPower?> GetSuperPowerByIdAsync(Guid id);
 
 
     }

@@ -54,6 +54,11 @@ namespace Heroes.Infrastructure.Repositories
             _context.Heroes.Remove(hero);
             await _context.SaveChangesAsync();
         }
+        public async Task<SuperPower?> GetSuperPowerByIdAsync(Guid id)
+        {
+            return await _context.SuperPowers.FirstOrDefaultAsync(sp => sp.Id == id);
+        }
+
 
     }
 }

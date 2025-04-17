@@ -14,8 +14,20 @@ namespace Heroes.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<HeroSuperPower>()
                 .HasKey(hs => new { hs.HeroId, hs.SuperPowerId });
+
+            modelBuilder.Entity<HeroSuperPower>()
+                .HasOne(hs => hs.Hero)
+                .WithMany(h => h.HeroSuperPowers)
+                .HasForeignKey(hs => hs.HeroId);
+
+            modelBuilder.Entity<HeroSuperPower>()
+                .HasOne(hs => hs.SuperPower)
+                .WithMany(sp => sp.HeroSuperPowers)
+                .HasForeignKey(hs => hs.SuperPowerId);
         }
     }
 }

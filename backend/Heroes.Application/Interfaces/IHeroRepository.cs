@@ -8,6 +8,10 @@ namespace Heroes.Application.Interfaces
         Task AddAsync(Hero hero);
         Task<bool> ExistsByNameAsync(string name);
         Task<List<Hero>> GetAllAsync();
+        Task UpdateAsync(Hero hero);
+        Task<Hero?> GetByNameAsync(string name);
+        Task DeleteAsync(Hero hero);
+
 
     }
 }

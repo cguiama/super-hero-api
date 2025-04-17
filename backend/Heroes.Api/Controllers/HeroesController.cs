@@ -1,4 +1,6 @@
 ﻿using Heroes.Application.Features.Heroes.Commands.CreateHero;
+using Heroes.Application.Features.Heroes.Commands.DeleteHero;
+using Heroes.Application.Features.Heroes.Commands.UpdateHero;
 using Heroes.Application.Features.Heroes.Dtos;
 using Heroes.Application.Features.Heroes.Queries.GetHeroById;
 using Heroes.Application.Features.Heroes.Queries.ListHeroes;
@@ -40,5 +42,27 @@ namespace Heroes.Api.Controllers
             var result = await _mediator.Send(new ListHeroesQuery());
             return Ok(result);
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] HeroUpdateDto dto)
+        {
+            dto.Id = id;
+            var result = await _mediator.Send(new UpdateHeroCommand(dto));
+            return Ok(result);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                await _mediator.Send(new DeleteHeroCommand(id));
+                return NoContent(); // 204
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
     }
 }

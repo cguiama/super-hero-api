@@ -10,6 +10,7 @@ using FluentValidation.AspNetCore;
 using Heroes.Application.Features.Heroes.Validators;
 using Heroes.Application.Behaviors;
 using Heroes.Api.Middlewares;
+using Heroes.Application.Features.Heroes.Commands.DeleteHero; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HeroesDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddMediatR(typeof(Heroes.Application.Features.Heroes.Queries.GetHeroById.GetHeroByIdQuery).Assembly);
+builder.Services.AddMediatR(typeof(DeleteHeroCommand).Assembly);
+
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<MappingProfile>();

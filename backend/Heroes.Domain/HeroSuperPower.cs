@@ -3,10 +3,10 @@
     public class HeroSuperPower
     {
         public Guid HeroId { get; private set; }
-        public Hero Hero { get; private set; }
+        public Hero Hero { get; private set; } = null!;
 
         public Guid SuperPowerId { get; private set; }
-        public SuperPower SuperPower { get; private set; }
+        public SuperPower SuperPower { get; private set; } = null!;
 
         private HeroSuperPower() { }
 

@@ -38,7 +38,22 @@ builder.Services.AddTransient(
     typeof(ValidationBehavior<,>)
 );
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
+
 var app = builder.Build();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseMiddleware<ValidationExceptionMiddleware>();
 

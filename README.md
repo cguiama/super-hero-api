@@ -1,11 +1,13 @@
-# 🦸‍♂️ Hero Management API
+# 🦸‍♂️ Hero Management API + Frontend
 
-API REST para gerenciamento de super-heróis, desenvolvida como parte de um desafio FullStack. O projeto utiliza arquitetura **Clean Architecture**, **.NET 8**, **Entity Framework Core (PostgreSQL)**, **CQRS** com **MediatR** e **FluentValidation**.
+API REST e Frontend para gerenciamento de super-heróis, desenvolvidos como parte de um desafio FullStack.
+O projeto utiliza arquitetura **Clean Architecture**, **.NET 8**, **Entity Framework Core (PostgreSQL)**, **CQRS** com **MediatR** e **FluentValidation** no backend, além de **Angular 19** com **Micro Frontends (MFE)** no frontend.
 
 ---
 
 ## 📚 Funcionalidades Implementadas
 
+### Backend
 - ✅ Cadastro de herói com dados completos
 - ✅ Associação de múltiplos superpoderes a um herói
 - ✅ Listagem de heróis
@@ -16,23 +18,40 @@ API REST para gerenciamento de super-heróis, desenvolvida como parte de um desa
 - ✅ Validações com FluentValidation
 - ✅ Documentação da API com Swagger
 
+### Frontend
+- ✅ Criação de arquitetura inicial com Angular 19 standalone
+- ✅ Implementação de Micro Frontends (MFE) usando Module Federation
+- ✅ HeroStore implementado com **Signals** para gerenciamento reativo de estado
+- ✅ Consumo da API REST do backend
+- ✅ Listagem de heróis no frontend
+- ✅ Integração backend + frontend 100% funcional
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+### Backend
+- .NET 8
 - ASP.NET Core Web API
-- Entity Framework Core (Code First + PostgreSQL)
+- Entity Framework Core (PostgreSQL)
 - MediatR (CQRS)
 - AutoMapper
 - FluentValidation
 - Swagger (Swashbuckle)
 
+### Frontend
+- Angular 19 (Standalone Components)
+- Module Federation (Micro Frontends)
+- Angular Signals
+- RxJS
+- SCSS
+
 ---
 
 ## 🧱 Arquitetura
 
-O projeto segue o padrão **Clean Architecture**, com divisão em camadas:
+### Backend
+Segue o padrão **Clean Architecture**, com divisão em camadas:
 
 ```
 HeroManagement/
@@ -42,53 +61,16 @@ HeroManagement/
 ├── Heroes.Api/           # API (Controllers, Program.cs)
 ```
 
----
-
-
----
-
-## 🧠 Padrão CQRS (Command and Query Responsibility Segregation)
-
-Este projeto aplica o padrão **CQRS**, que separa as responsabilidades de **leitura (Queries)** e **escrita (Commands)** da aplicação. Isso melhora a organização, escalabilidade e testabilidade do código.
-
-### 📌 Benefícios aplicados no projeto:
-
-- 📂 Separação clara entre leitura e escrita
-- 📤 Comandos manipulam estado: `CreateHeroCommand`, `UpdateHeroCommand`, etc.
-- 📥 Consultas são isoladas e sem efeitos colaterais: `GetHeroByIdQuery`, `GetAllHeroesQuery`, etc.
-- 📬 Integração com **MediatR** para centralizar o envio de comandos e queries
-- ✅ Facilita a validação e mapeamento em cada lado (leitura e escrita)
-
----
-
-### 🗂️ Estrutura aplicada:
+### Frontend
+Organizado em Shell e Micro Frontend (MFE):
 
 ```
-Heroes.Application/
-└── Features/
-    └── Heroes/
-        ├── Commands/
-        │   └── CreateHero/
-        │       ├── CreateHeroCommand.cs
-        │       └── CreateHeroCommandHandler.cs
-        ├── Queries/
-        │   └── GetHeroById/
-        │       ├── GetHeroByIdQuery.cs
-        │       └── GetHeroByIdQueryHandler.cs
-        └── Dtos/
-            └── HeroDto.cs
+frontend/
+├── heroes-shell/    # Aplicativo principal (host)
+├── heroes-mfe/      # MFE dos heróis (listagem, cadastro, etc)
 ```
 
 ---
-
-### 🔁 Como funciona:
-
-1. O Controller recebe uma requisição
-2. Envia um `Command` ou `Query` via **`IMediator.Send()`**
-3. O **Handler** do comando ou da query é executado separadamente
-4. A camada de persistência (via repositório) é chamada de forma indireta
-5. O resultado (ou ação) é retornado ao Controller
-
 
 ## 🗃️ Banco de Dados
 
@@ -109,8 +91,9 @@ Heroes.Application/
 
 ---
 
-## 🧪 Como executar o projeto localmente
+## 🚀 Como executar o projeto localmente
 
+### Backend
 1. Clonar o repositório
 2. Criar o banco no PostgreSQL e ajustar a connection string em `appsettings.json`
 3. Rodar as migrations:
@@ -119,24 +102,40 @@ Heroes.Application/
 dotnet ef database update --project Heroes.Infrastructure --startup-project Heroes.Api
 ```
 
-4. Executar o projeto:
+4. Executar o backend:
 
 ```bash
 dotnet run --project Heroes.Api
 ```
 
 5. Acessar o Swagger:
+
 ```
 https://localhost:{porta}/swagger
 ```
 
----
+### Frontend
 
-## 🧑‍💻 Próximos passos
+1. Acessar a pasta `frontend`
+2. Rodar o shell e o mfe em dois terminais diferentes:
 
-- [ ] Iniciar o frontend em Angular 19
-- [ ] Tela de cadastro de herói com select múltiplo de superpoderes
-- [ ] Deploy e publicação da aplicação
+```bash
+cd heroes-mfe
+npm install
+ng serve --port 4201
+```
+
+```bash
+cd heroes-shell
+npm install
+ng serve --port 4200
+```
+
+3. Acessar o Frontend:
+
+```
+http://localhost:4200/heroes
+```
 
 ---
 
@@ -144,4 +143,4 @@ https://localhost:{porta}/swagger
 
 **Guilherme Castro**  
 Desenvolvedor Full Stack  
-Projeto desenvolvido para desafio técnico
+Projeto desenvolvido para desafio técnico FullStack

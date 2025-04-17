@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { HeroStore } from '../../store/hero.store';
 
 @Component({
@@ -8,11 +8,13 @@ import { HeroStore } from '../../store/hero.store';
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule  
+    HttpClientModule
   ],
+  providers: [HeroStore], // <- Aqui
   templateUrl: './hero-list.component.html',
   styleUrls: ['./hero-list.component.scss']
 })
+
 export class HeroListComponent {
 
   constructor(public heroStore: HeroStore) {}

@@ -4,7 +4,9 @@ import { Hero } from '../models/hero.model';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HeroStore {
   private readonly baseUrl = 'http://localhost:5260/api/Heroes';
 

@@ -10,7 +10,7 @@ import { HeroStore } from '../../store/hero.store';
     CommonModule,
     HttpClientModule
   ],
-  providers: [HeroStore], // <- Aqui
+  providers: [HeroStore],
   templateUrl: './hero-list.component.html',
   styleUrls: ['./hero-list.component.scss']
 })

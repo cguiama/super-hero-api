@@ -1,0 +1,28 @@
+<div class="create-container">
+  <h1>Cadastrar Novo Herói</h1>
+
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+
+    <input type="text" formControlName="name" placeholder="Nome">
+
+    <input type="text" formControlName="heroName" placeholder="Nome de Herói">
+
+    <input type="date" formControlName="birthDate">
+
+    <input type="number" formControlName="height" placeholder="Altura (m)">
+
+    <input type="number" formControlName="weight" placeholder="Peso (kg)">
+
+    <div class="powers-section">
+      <h3>Selecione os Superpoderes:</h3>
+      <div *ngFor="let power of superPowers; let i = index">
+        <label>
+          <input type="checkbox" [formControl]="getFormControlAt(i)">
+          {{ power.name }}
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="heroForm.invalid">Salvar Herói</button>
+  </form>
+</div>

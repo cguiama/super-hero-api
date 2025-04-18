@@ -1,0 +1,41 @@
+.home-container {
+  min-height: 100vh;
+  background: url('/assets/images/marvel-rivals-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menu-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffffff;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
